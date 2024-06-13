@@ -41,12 +41,12 @@ const EthScanner = () => {
 	const [offset, setOffset] = useState(25);
 
 	const { data: ethAccountBalance } = useEthAccountBalance(address);
-	const { data: ethLatestPrice } = useEthLatestPrice();
+	const { data: ethLatestPrice } = useEthLatestPrice(address);
 	const { data: ethStats } = useEthStats();
-	const { data: ethGasInfo } = useEthGasOracle();
+	const { data: ethGasInfo } = useEthGasOracle(address);
 	const { data: ethGasTime } = useEthGasTimeCalculation(gasPrice);
 	const { data: transactions } = useEthTransactionList(address, page, offset, transactionListType);
-console.log(typeof transactions)
+
 
 	const handlePushToBuffer = async (trxHash) => {
 		if (navigator.clipboard) {

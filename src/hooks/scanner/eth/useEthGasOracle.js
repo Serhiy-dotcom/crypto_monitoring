@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import ethScannerAxios from './setupEthScannerAxios';
 
-export const useEthGasOracle = (retryCount = 3) => {
+export const useEthGasOracle = (address, retryCount = 3) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -44,7 +44,7 @@ export const useEthGasOracle = (retryCount = 3) => {
     return () => {
       isMounted = false;
     };
-  }, [retryCount]);
+  }, [retryCount, address]);
 
   useEffect(() => {
     fetchData(retry);

@@ -26,6 +26,12 @@ const SearchBox = () => {
 
 	const handleSearch = (e) => setSearchQuery(e.target.value);
 
+	const handleHideSearchModal = () => {
+		setShowSearchModal(false);
+		setSearchQuery('');
+		setSearchCategory('coins');
+	}
+
 	if (isLoading) return <div>Loading...</div>;
 
 	if (error) return <div>Error</div>
@@ -38,7 +44,7 @@ const SearchBox = () => {
 			</SearchBoxBtn>
 
 			{showSearchModal && (
-				<SearchBoxModalWrapper onClick={() => setShowSearchModal(false)}>
+				<SearchBoxModalWrapper onClick={handleHideSearchModal}>
 					<SearchBoxModal onClick={(e) => e.stopPropagation()}>
 						<SearchBoxInput placeholder="Search" onChange={handleSearch} />
 
@@ -55,7 +61,7 @@ const SearchBox = () => {
 							<SearchBoxResult>
 								{data[searchCategory].map(({ id, name, symbol, market_cap_rank, large, thumb }) => (
 									<SearchBoxResultItem key={id}>
-										<Link to={`/currency/${id}`} onClick={() => setShowSearchModal(false)}>
+										<Link to={searchCategory === 'coins' ? `/currency/${id}` : ''} onClick={handleHideSearchModal}>
 											<img src={large ?? thumb} alt={name} />
 											<span className="name">{name}</span>
 											<span className="symbol">{symbol}</span>

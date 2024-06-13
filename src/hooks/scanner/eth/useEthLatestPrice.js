@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import ethScannerAxios from './setupEthScannerAxios';
 
-export const useEthLatestPrice = () => {
+export const useEthLatestPrice = (address) => {
 	const [data, setData] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -34,7 +34,7 @@ export const useEthLatestPrice = () => {
 		fetchData();
 
 		return () => isMounted = false;
-	}, []);
+	}, [address]);
 
 	return { data, loading, error };
 };
